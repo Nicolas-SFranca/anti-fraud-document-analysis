@@ -1,40 +1,34 @@
-Anti-Fraud Document Analysis com Azure AI
+# Anti-Fraud Document Analysis com Azure AI
 
 Projeto desenvolvido como desafio do curso de Inteligência Artificial da DIO.
 
 Este projeto demonstra como utilizar serviços de IA da Azure para analisar documentos e identificar possíveis sinais de fraude a partir do conteúdo textual extraído.
 
-Visão Geral
+## Visão Geral
 
 O sistema recebe um documento (PDF ou imagem), extrai o texto utilizando Azure Document Intelligence e realiza a análise de risco com Azure OpenAI.
 
 A saída da análise inclui:
 
-Score de risco (0.0 a 1.0)
-
-Classificação de risco (Low, Medium, High)
-
-Justificativa da análise
-
-Elementos suspeitos identificados
-
-Recomendações de ação
+- Score de risco (0.0 a 1.0)
+- Classificação de risco (Low, Medium, High)
+- Justificativa da análise
+- Elementos suspeitos identificados
+- Recomendações de ação
 
 O objetivo é demonstrar a aplicação prática de modelos de linguagem para apoio à detecção de fraude documental.
 
-Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-Python 3.8+
+- Python 3.8+
+- Azure Document Intelligence (OCR)
+- Azure OpenAI Service
+- python-dotenv
+- Azure SDK
 
-Azure Document Intelligence (OCR)
+## Estrutura do Projeto
 
-Azure OpenAI Service
-
-python-dotenv
-
-Azure SDK
-
-Estrutura do Projeto
+```
 anti-fraud-document-analysis/
 ├── app/
 │   ├── main.py
@@ -48,77 +42,77 @@ anti-fraud-document-analysis/
 ├── exemplos-prompt (1).md
 ├── requirements (1).txt
 └── README.md
+```
 
-Diretório app/
+### Diretório `app/`
 
 Contém a lógica principal do sistema:
 
-main.py – Orquestra o fluxo completo de processamento.
+- **main.py** – Orquestra o fluxo completo de processamento
+- **config.py** – Gerencia variáveis de ambiente e configurações
+- **document_service.py** – Realiza a extração de texto via Azure
+- **fraud_analyzer.py** – Executa a análise de fraude utilizando LLM
 
-config.py – Gerencia variáveis de ambiente e configurações.
-
-document_service.py – Realiza a extração de texto via Azure.
-
-fraud_analyzer.py – Executa a análise de fraude utilizando LLM.
-
-Diretório docs/
+### Diretório `docs/`
 
 Contém documentação complementar:
 
-Arquitetura do sistema
+- Arquitetura do sistema
+- Requisitos funcionais e não funcionais
+- Roadmap de evolução
 
-Requisitos funcionais e não funcionais
-
-Roadmap de evolução
-
-Arquivo exemplos-prompt (1).md
+### Arquivo `exemplos-prompt (1).md`
 
 Apresenta exemplos de prompts utilizados para estruturar a análise de fraude com o modelo.
 
-Fluxo de Funcionamento
+## Fluxo de Funcionamento
 
-O usuário fornece um arquivo (PDF ou imagem).
+1. O usuário fornece um arquivo (PDF ou imagem)
+2. O sistema envia o documento para o Azure Document Intelligence
+3. O texto extraído é enviado ao Azure OpenAI
+4. O modelo retorna uma análise estruturada em JSON
+5. O sistema classifica automaticamente o nível de risco
 
-O sistema envia o documento para o Azure Document Intelligence.
+## Configuração
 
-O texto extraído é enviado ao Azure OpenAI.
+Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
-O modelo retorna uma análise estruturada em JSON.
-
-O sistema classifica automaticamente o nível de risco.
-
-Configuração
-
-Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
-
+```env
 AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=
 AZURE_DOCUMENT_INTELLIGENCE_KEY=
 AZURE_OPENAI_ENDPOINT=
 AZURE_OPENAI_KEY=
 AZURE_OPENAI_DEPLOYMENT_NAME=
+```
 
-Instalação
+## Instalação
 
 Clone o repositório:
 
+```bash
 git clone <url-do-repositorio>
 cd anti-fraud-document-analysis
-
+```
 
 Instale as dependências:
 
+```bash
 pip install -r "requirements (1).txt"
+```
 
-Execução
+## Execução
 
 Para analisar um documento local:
 
+```bash
 python app/main.py caminho/do/documento.pdf
-
+```
 
 O sistema exibirá o resultado no terminal e salvará automaticamente um arquivo JSON com a análise.
 
-Exemplo de Saída
+## Exemplo de Saída
+
+```json
 {
   "success": true,
   "fraud_analysis": {
@@ -130,21 +124,17 @@ Exemplo de Saída
     "confidence": 0.85
   }
 }
+```
 
-Limitações
+## Limitações
 
-Requer conexão ativa com a Azure.
+- Requer conexão ativa com a Azure
+- O modelo fornece análise probabilística
+- Não substitui revisão humana em casos críticos
 
-O modelo fornece análise probabilística.
+## Possíveis Evoluções
 
-Não substitui revisão humana em casos críticos.
-
-Possíveis Evoluções
-
-Processamento em lote de documentos
-
-Interface web
-
-Validação automática de CPF/CNPJ
-
-API REST para integração com outros sistemas
+- Processamento em lote de documentos
+- Interface web
+- Validação automática de CPF/CNPJ
+- API REST para integração com outros sistemas

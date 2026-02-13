@@ -1,32 +1,26 @@
 Anti-Fraud Document Analysis com Azure AI
 
-Projeto desenvolvido como desafio do curso de IA da DIO.
+Projeto desenvolvido como desafio do curso de Inteligência Artificial da DIO.
 
-O objetivo é analisar documentos (PDF ou imagem), extrair o texto usando serviços de IA da Azure e aplicar um modelo de linguagem para identificar possíveis sinais de fraude.
+Este projeto demonstra como utilizar serviços de IA da Azure para analisar documentos e identificar possíveis sinais de fraude a partir do conteúdo textual extraído.
 
-Objetivo do Projeto
+Visão Geral
 
-Criar um sistema simples que:
+O sistema recebe um documento (PDF ou imagem), extrai o texto utilizando Azure Document Intelligence e realiza a análise de risco com Azure OpenAI.
 
-Recebe um documento.
-
-Extrai o texto utilizando Azure Document Intelligence.
-
-Analisa o conteúdo com Azure OpenAI.
-
-Retorna:
+A saída da análise inclui:
 
 Score de risco (0.0 a 1.0)
 
-Classificação (Low, Medium, High)
+Classificação de risco (Low, Medium, High)
 
-Justificativa
+Justificativa da análise
 
-Elementos suspeitos
+Elementos suspeitos identificados
 
-Recomendações
+Recomendações de ação
 
-O foco é demonstrar o uso prático de serviços de IA para apoiar processos de detecção de fraude documental.
+O objetivo é demonstrar a aplicação prática de modelos de linguagem para apoio à detecção de fraude documental.
 
 Tecnologias Utilizadas
 
@@ -53,45 +47,45 @@ anti-fraud-document-analysis/
 │   └── roadmap.md
 ├── exemplos-prompt (1).md
 ├── requirements (1).txt
-└── README
+└── README.md
 
-app/
+Diretório app/
 
 Contém a lógica principal do sistema:
 
-main.py – Orquestra o fluxo completo.
+main.py – Orquestra o fluxo completo de processamento.
 
-config.py – Carrega variáveis de ambiente.
+config.py – Gerencia variáveis de ambiente e configurações.
 
-document_service.py – Responsável pela extração de texto.
+document_service.py – Realiza a extração de texto via Azure.
 
-fraud_analyzer.py – Responsável pela análise de fraude usando LLM.
+fraud_analyzer.py – Executa a análise de fraude utilizando LLM.
 
-docs/
+Diretório docs/
 
-Documentação complementar:
+Contém documentação complementar:
 
-Arquitetura do sistema.
+Arquitetura do sistema
 
-Requisitos funcionais e não funcionais.
+Requisitos funcionais e não funcionais
 
-Roadmap de evolução.
+Roadmap de evolução
 
-exemplos-prompt (1).md
+Arquivo exemplos-prompt (1).md
 
-Exemplos de prompts utilizados para orientar o modelo na análise de fraude.
+Apresenta exemplos de prompts utilizados para estruturar a análise de fraude com o modelo.
 
-Como Funciona o Fluxo
+Fluxo de Funcionamento
 
 O usuário fornece um arquivo (PDF ou imagem).
 
 O sistema envia o documento para o Azure Document Intelligence.
 
-O texto extraído é enviado para o Azure OpenAI.
+O texto extraído é enviado ao Azure OpenAI.
 
 O modelo retorna uma análise estruturada em JSON.
 
-O sistema classifica o risco com base no score retornado.
+O sistema classifica automaticamente o nível de risco.
 
 Configuração
 
@@ -122,18 +116,15 @@ Para analisar um documento local:
 python app/main.py caminho/do/documento.pdf
 
 
-O sistema exibirá o resultado no terminal e salvará um arquivo JSON com a análise.
+O sistema exibirá o resultado no terminal e salvará automaticamente um arquivo JSON com a análise.
 
 Exemplo de Saída
-
-O sistema retorna um JSON estruturado como:
-
 {
   "success": true,
   "fraud_analysis": {
     "risk_score": 0.72,
     "risk_level": "Medium",
-    "justification": "...",
+    "justification": "Análise detalhada...",
     "suspicious_elements": [],
     "recommendations": [],
     "confidence": 0.85
@@ -142,18 +133,18 @@ O sistema retorna um JSON estruturado como:
 
 Limitações
 
-Dependente de conexão com a Azure.
+Requer conexão ativa com a Azure.
 
-Não substitui análise humana.
+O modelo fornece análise probabilística.
 
-O score é probabilístico, baseado em modelo de linguagem.
+Não substitui revisão humana em casos críticos.
 
 Possíveis Evoluções
 
-Processamento em lote.
+Processamento em lote de documentos
 
-Interface web.
+Interface web
 
-Validação automática de CPF/CNPJ.
+Validação automática de CPF/CNPJ
 
-API REST.
+API REST para integração com outros sistemas
